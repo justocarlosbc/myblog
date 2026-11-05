@@ -28,8 +28,12 @@ export class UsersController {
   }
   @Post()
   createUser(@Body() body: User) {
-    this.users.push(body);
-    return body;
+    const newUser = {
+      ...body,
+      id: `${this.users.length + 1}`
+    };
+    this.users.push(newUser);
+    return newUser;
   }
   @Delete(':id')
   deleteUser(@Param('id') id: string) {
